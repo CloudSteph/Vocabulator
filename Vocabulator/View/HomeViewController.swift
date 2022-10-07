@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class MainViewController: UIViewController {
+final class HomeViewController: UIViewController {
+    
+    private var viewModel: VocabVM = .init()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,15 +40,15 @@ final class MainViewController: UIViewController {
     let vocabLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Coding"
-        label.font = UIFont(name: "Rubik-SemiBold", size: 25)
+//        label.text =
+        label.font = UIFont(name: "Rubik-SemiBold", size: 30)
         return label
     }()
     
     let speechTypeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "noun"
+//        label.text = "noun"
         label.font = UIFont(name: "Rubik-Italic", size: 14)
         return label
     }()
@@ -53,14 +56,23 @@ final class MainViewController: UIViewController {
     let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "the process or activity of writing computer programs"
+//        label.text = "the process or activity of writing computer programs"
         label.textAlignment = .natural
         label.font = UIFont(name: "Rubik-Light", size: 16)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
     }()
-
+    
+    let refreshButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .medium)
+        button.setImage(UIImage(systemName: "arrow.clockwise.circle", withConfiguration: largeConfig), for: .normal)
+        button.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
+        button.tintColor = .white
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,11 +81,12 @@ final class MainViewController: UIViewController {
         setVocabContainer()
         setStackLabels()
         setDefinitionLabel()
+        setRefreshButton()
     }
 }
 
 // MARK: - Setup Methods
-extension MainViewController {
+extension HomeViewController {
     private func setTitleLabel() {
         
         view.addSubview(titleLabel)
@@ -116,10 +129,33 @@ extension MainViewController {
         vocabContainer.addSubview(definitionLabel)
         
         NSLayoutConstraint.activate([
-            definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 35),
+            definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 40),
             definitionLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             definitionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
         ])
     }
 }
 
+// MARK: - Setup Button
+extension HomeViewController {
+    private func setRefreshButton() {
+        
+        vocabContainer.addSubview(refreshButton)
+        
+        NSLayoutConstraint.activate([
+            refreshButton.topAnchor.constraint(equalTo: speechTypeLabel.topAnchor, constant: 120),
+            refreshButton.leadingAnchor.constraint(equalTo: speechTypeLabel.leadingAnchor),
+            refreshButton.trailingAnchor.constraint(equalTo: speechTypeLabel.trailingAnchor)
+        ])
+    }
+    
+    @objc func refreshButtonTapped() {
+        guard let unwrapRandomVocab = viewModel.randomVocab() else {
+            return
+        }
+        
+        vocabLabel.text = unwrapRandomVocab.word
+        speechTypeLabel.text = unwrapRandomVocab.speechType
+        definitionLabel.text = unwrapRandomVocab.definition
+    }
+}

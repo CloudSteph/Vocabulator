@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B2E9F58428EB1EA500CAE4ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F58328EB1EA500CAE4ED /* AppDelegate.swift */; };
 		B2E9F58628EB1EA500CAE4ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F58528EB1EA500CAE4ED /* SceneDelegate.swift */; };
-		B2E9F58828EB1EA500CAE4ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F58728EB1EA500CAE4ED /* MainViewController.swift */; };
+		B2E9F58828EB1EA500CAE4ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F58728EB1EA500CAE4ED /* HomeViewController.swift */; };
 		B2E9F58D28EB1EA800CAE4ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F58C28EB1EA800CAE4ED /* Assets.xcassets */; };
 		B2E9F59028EB1EA800CAE4ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F58E28EB1EA800CAE4ED /* LaunchScreen.storyboard */; };
 		B2E9F59928EB434100CAE4ED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F59828EB434100CAE4ED /* Colors.swift */; };
@@ -17,13 +17,15 @@
 		B2E9F5A128EB817100CAE4ED /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F59D28EB80F500CAE4ED /* Rubik-Bold.ttf */; };
 		B2E9F5A228EB817800CAE4ED /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F59E28EB80F500CAE4ED /* Rubik-Italic.ttf */; };
 		B2E9F5A328EB817B00CAE4ED /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F59C28EB80F500CAE4ED /* Rubik-SemiBold.ttf */; };
+		B2E9F5A728EF2C7E00CAE4ED /* Vocabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F5A628EF2C7E00CAE4ED /* Vocabulary.swift */; };
+		B2E9F5AA28EF50EC00CAE4ED /* VocabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F5A928EF50EC00CAE4ED /* VocabVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B2E9F58028EB1EA500CAE4ED /* Vocabulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E9F58328EB1EA500CAE4ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2E9F58528EB1EA500CAE4ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B2E9F58728EB1EA500CAE4ED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B2E9F58728EB1EA500CAE4ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B2E9F58C28EB1EA800CAE4ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2E9F58F28EB1EA800CAE4ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2E9F59128EB1EA800CAE4ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +35,8 @@
 		B2E9F59D28EB80F500CAE4ED /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		B2E9F59E28EB80F500CAE4ED /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		B2E9F5A428EE1DC800CAE4ED /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		B2E9F5A628EF2C7E00CAE4ED /* Vocabulary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocabulary.swift; sourceTree = "<group>"; };
+		B2E9F5A928EF50EC00CAE4ED /* VocabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +73,9 @@
 				B2E9F58528EB1EA500CAE4ED /* SceneDelegate.swift */,
 				B2E9F59F28EB811300CAE4ED /* Rubik */,
 				B2E9F59728EB432400CAE4ED /* Helpers */,
+				B2E9F5A528EF2A4700CAE4ED /* Model */,
 				B2E9F59A28EB48FE00CAE4ED /* View */,
+				B2E9F5A828EF50D400CAE4ED /* ViewModel */,
 				B2E9F58C28EB1EA800CAE4ED /* Assets.xcassets */,
 				B2E9F58E28EB1EA800CAE4ED /* LaunchScreen.storyboard */,
 				B2E9F59128EB1EA800CAE4ED /* Info.plist */,
@@ -88,7 +94,7 @@
 		B2E9F59A28EB48FE00CAE4ED /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B2E9F58728EB1EA500CAE4ED /* MainViewController.swift */,
+				B2E9F58728EB1EA500CAE4ED /* HomeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,6 +109,22 @@
 				B2E9F5A428EE1DC800CAE4ED /* Rubik-Light.ttf */,
 			);
 			path = Rubik;
+			sourceTree = "<group>";
+		};
+		B2E9F5A528EF2A4700CAE4ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B2E9F5A628EF2C7E00CAE4ED /* Vocabulary.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B2E9F5A828EF50D400CAE4ED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B2E9F5A928EF50EC00CAE4ED /* VocabVM.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +201,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E9F58828EB1EA500CAE4ED /* MainViewController.swift in Sources */,
+				B2E9F58828EB1EA500CAE4ED /* HomeViewController.swift in Sources */,
+				B2E9F5A728EF2C7E00CAE4ED /* Vocabulary.swift in Sources */,
+				B2E9F5AA28EF50EC00CAE4ED /* VocabVM.swift in Sources */,
 				B2E9F59928EB434100CAE4ED /* Colors.swift in Sources */,
 				B2E9F58428EB1EA500CAE4ED /* AppDelegate.swift in Sources */,
 				B2E9F58628EB1EA500CAE4ED /* SceneDelegate.swift in Sources */,
