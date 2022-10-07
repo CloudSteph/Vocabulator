@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Vocabulator"
-        label.font = UIFont(name: "Rubik-Bold", size: 35)
+        label.font = UIFont(name: "Montserrat-Bold", size: 35)
         label.textAlignment = .left
         return label
     }()
@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.backgroundColor = Colors.blue
-        container.layer.cornerRadius = 20
+        container.layer.cornerRadius = 25
         return container
     }()
     
@@ -40,25 +40,25 @@ final class HomeViewController: UIViewController {
     let vocabLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text =
-        label.font = UIFont(name: "Rubik-SemiBold", size: 30)
+        label.text = "Algorithm"
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 30)
         return label
     }()
     
     let speechTypeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "noun"
-        label.font = UIFont(name: "Rubik-Italic", size: 14)
+        label.text = "noun"
+        label.font = UIFont(name: "Montserrat-Italic", size: 14)
         return label
     }()
     
     let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "the process or activity of writing computer programs"
+        label.text = "a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer"
         label.textAlignment = .natural
-        label.font = UIFont(name: "Rubik-Light", size: 16)
+        label.font = UIFont(name: "Montserrat-Light", size: 16)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController {
     let refreshButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .medium)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 35, weight: .regular, scale: .medium)
         button.setImage(UIImage(systemName: "arrow.clockwise.circle", withConfiguration: largeConfig), for: .normal)
         button.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
         button.tintColor = .white
@@ -129,7 +129,7 @@ extension HomeViewController {
         vocabContainer.addSubview(definitionLabel)
         
         NSLayoutConstraint.activate([
-            definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 40),
+            definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 45),
             definitionLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             definitionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
         ])
@@ -143,9 +143,10 @@ extension HomeViewController {
         vocabContainer.addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
-            refreshButton.topAnchor.constraint(equalTo: speechTypeLabel.topAnchor, constant: 120),
-            refreshButton.leadingAnchor.constraint(equalTo: speechTypeLabel.leadingAnchor),
-            refreshButton.trailingAnchor.constraint(equalTo: speechTypeLabel.trailingAnchor)
+            refreshButton.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 130),
+            refreshButton.bottomAnchor.constraint(equalTo: vocabContainer.bottomAnchor),
+            refreshButton.leadingAnchor.constraint(equalTo: vocabContainer.leadingAnchor, constant: 275),
+            refreshButton.trailingAnchor.constraint(equalTo: vocabContainer.trailingAnchor)
         ])
     }
     
