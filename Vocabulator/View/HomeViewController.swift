@@ -23,7 +23,7 @@ final class HomeViewController: UIViewController {
     let vocabContainer: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = Colors.blue
+        container.backgroundColor = Colors.lightBlue
         container.layer.cornerRadius = 25
         return container
     }()
@@ -58,7 +58,7 @@ final class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer"
         label.textAlignment = .natural
-        label.font = UIFont(name: "Montserrat-Light", size: 16)
+        label.font = UIFont(name: "Montserrat-Light", size: 14)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
@@ -67,11 +67,21 @@ final class HomeViewController: UIViewController {
     let refreshButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 35, weight: .regular, scale: .medium)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular, scale: .medium)
         button.setImage(UIImage(systemName: "arrow.clockwise.circle", withConfiguration: largeConfig), for: .normal)
-        button.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(refreshButtonTapped(sender:)), for: .touchUpInside)
         button.tintColor = .white
         return button
+    }()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(HomeCell.self, forCellReuseIdentifier: "HomeCell")
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 20
+        tableView.backgroundColor = Colors.white
+        return tableView
     }()
     
     override func viewDidLoad() {
@@ -82,24 +92,23 @@ final class HomeViewController: UIViewController {
         setStackLabels()
         setDefinitionLabel()
         setRefreshButton()
+        setTableView()
     }
 }
 
 // MARK: - Setup Methods
 extension HomeViewController {
     private func setTitleLabel() {
-        
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
     
     private func setVocabContainer() {
-        
         view.addSubview(vocabContainer)
         
         NSLayoutConstraint.activate([
@@ -111,7 +120,6 @@ extension HomeViewController {
     }
     
     private func setStackLabels() {
-        
         vocabContainer.addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -125,7 +133,6 @@ extension HomeViewController {
     }
     
     private func setDefinitionLabel() {
-        
         vocabContainer.addSubview(definitionLabel)
         
         NSLayoutConstraint.activate([
@@ -143,14 +150,14 @@ extension HomeViewController {
         vocabContainer.addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
-            refreshButton.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 130),
+            refreshButton.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 145),
             refreshButton.bottomAnchor.constraint(equalTo: vocabContainer.bottomAnchor),
-            refreshButton.leadingAnchor.constraint(equalTo: vocabContainer.leadingAnchor, constant: 275),
+            refreshButton.leadingAnchor.constraint(equalTo: vocabContainer.leadingAnchor, constant: 290),
             refreshButton.trailingAnchor.constraint(equalTo: vocabContainer.trailingAnchor)
         ])
     }
     
-    @objc func refreshButtonTapped() {
+    @objc func refreshButtonTapped(sender: UIButton) {
         guard let unwrapRandomVocab = viewModel.randomVocab() else {
             return
         }
@@ -160,3 +167,49 @@ extension HomeViewController {
         definitionLabel.text = unwrapRandomVocab.definition
     }
 }
+
+// MARK: - Setup TableView
+extension HomeViewController {
+    private func setTableView() {
+     
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 220),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Row Selected: \(viewModel.count())")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.count()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? HomeCell else {
+            return .init()
+        }
+        
+        cell.configure(with: viewModel.term(at: indexPath))
+        cell.backgroundColor = .clear
+        return cell
+    }
+}
+
+

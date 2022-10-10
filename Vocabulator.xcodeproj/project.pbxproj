@@ -25,6 +25,7 @@
 		B2E9F5B528F0819900CAE4ED /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F5B128F07CB500CAE4ED /* Montserrat-Medium.ttf */; };
 		B2E9F5B628F0819C00CAE4ED /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F5AC28F07CB500CAE4ED /* Montserrat-Regular.ttf */; };
 		B2E9F5B728F0819F00CAE4ED /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2E9F5AD28F07CB500CAE4ED /* Montserrat-SemiBold.ttf */; };
+		B2E9F5BA28F0B35600CAE4ED /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9F5B928F0B35600CAE4ED /* HomeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		B2E9F5AF28F07CB500CAE4ED /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		B2E9F5B028F07CB500CAE4ED /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		B2E9F5B128F07CB500CAE4ED /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		B2E9F5B928F0B35600CAE4ED /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				B2E9F58728EB1EA500CAE4ED /* HomeViewController.swift */,
+				B2E9F5B928F0B35600CAE4ED /* HomeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2E9F58828EB1EA500CAE4ED /* HomeViewController.swift in Sources */,
+				B2E9F5BA28F0B35600CAE4ED /* HomeCell.swift in Sources */,
 				B2E9F5A728EF2C7E00CAE4ED /* Vocabulary.swift in Sources */,
 				B2E9F5AA28EF50EC00CAE4ED /* VocabVM.swift in Sources */,
 				B2E9F59928EB434100CAE4ED /* Colors.swift in Sources */,
