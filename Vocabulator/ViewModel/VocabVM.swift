@@ -13,15 +13,12 @@ final class VocabVM {
     
     init() {
         words = sampleWords
-//        terms = wordData
     }
     
     //display random words
     func randomVocab() -> Vocabulary? {
         return words.randomElement()
     }
-    
-//    private(set) var terms: [VocabularyList] = []
     
     //counts number terms
     func count() -> Int {
@@ -33,3 +30,4 @@ final class VocabVM {
         return words[indexPath.row]
     }
 }
+

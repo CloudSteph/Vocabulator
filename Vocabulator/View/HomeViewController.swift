@@ -11,16 +11,7 @@ final class HomeViewController: UIViewController {
     
     private var viewModel: VocabVM = .init()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Vocabulator"
-        label.font = UIFont(name: "Montserrat-Bold", size: 35)
-        label.textAlignment = .left
-        return label
-    }()
-    
-    let vocabContainer: UIView = {
+    let blueVocabContainer: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.backgroundColor = Colors.lightBlue
@@ -33,15 +24,16 @@ final class HomeViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
         return stackView
     }()
     
     let vocabLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Algorithm"
+        label.text = "algorithm"
         label.font = UIFont(name: "Montserrat-SemiBold", size: 30)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -50,6 +42,7 @@ final class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "noun"
         label.font = UIFont(name: "Montserrat-Italic", size: 14)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
@@ -58,18 +51,18 @@ final class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer"
         label.textAlignment = .natural
-        label.font = UIFont(name: "Montserrat-Light", size: 14)
+        label.font = UIFont(name: "Montserrat-Light", size: 16)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
     }()
     
-    let refreshButton: UIButton = {
+    lazy var refreshButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular, scale: .medium)
         button.setImage(UIImage(systemName: "arrow.clockwise.circle", withConfiguration: largeConfig), for: .normal)
-        button.addTarget(self, action: #selector(refreshButtonTapped(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
         button.tintColor = .white
         return button
     }()
@@ -87,8 +80,8 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setTitleLabel()
-        setVocabContainer()
+        setNavigationBar()
+        setBlueVocabContainer()
         setStackLabels()
         setDefinitionLabel()
         setRefreshButton()
@@ -98,34 +91,33 @@ final class HomeViewController: UIViewController {
 
 // MARK: - Setup Methods
 extension HomeViewController {
-    private func setTitleLabel() {
-        view.addSubview(titleLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
-        ])
+    
+    private func setNavigationBar() {
+        title = "Vocabulator 📖"
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Montserrat-Bold", size: 35)!]
+        navigationController?.navigationBar.layoutMargins.left = 2
+        navigationController?.navigationItem.hidesBackButton = true
+        navigationItem.backButtonTitle = "Back"
     }
     
-    private func setVocabContainer() {
-        view.addSubview(vocabContainer)
+    private func setBlueVocabContainer() {
+        view.addSubview(blueVocabContainer)
         
         NSLayoutConstraint.activate([
-            vocabContainer.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 60),
-            vocabContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            vocabContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            vocabContainer.heightAnchor.constraint(equalToConstant: 200)
+            blueVocabContainer.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            blueVocabContainer.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            blueVocabContainer.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            blueVocabContainer.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     private func setStackLabels() {
-        vocabContainer.addSubview(stackView)
+        blueVocabContainer.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 75),
-            stackView.leadingAnchor.constraint(equalTo: vocabContainer.leadingAnchor, constant: 15),
-            stackView.trailingAnchor.constraint(equalTo: vocabContainer.trailingAnchor, constant: -15),
+            stackView.topAnchor.constraint(equalTo: blueVocabContainer.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: blueVocabContainer.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: blueVocabContainer.trailingAnchor, constant: -20),
         ])
         
         stackView.addArrangedSubview(vocabLabel)
@@ -133,12 +125,12 @@ extension HomeViewController {
     }
     
     private func setDefinitionLabel() {
-        vocabContainer.addSubview(definitionLabel)
+        blueVocabContainer.addSubview(definitionLabel)
         
         NSLayoutConstraint.activate([
-            definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 45),
-            definitionLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            definitionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            definitionLabel.topAnchor.constraint(equalTo: blueVocabContainer.topAnchor, constant: 60),
+            definitionLabel.leadingAnchor.constraint(equalTo: blueVocabContainer.leadingAnchor, constant: 15),
+            definitionLabel.trailingAnchor.constraint(equalTo: blueVocabContainer.trailingAnchor),
         ])
     }
 }
@@ -147,13 +139,13 @@ extension HomeViewController {
 extension HomeViewController {
     private func setRefreshButton() {
         
-        vocabContainer.addSubview(refreshButton)
+        blueVocabContainer.addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
-            refreshButton.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 145),
-            refreshButton.bottomAnchor.constraint(equalTo: vocabContainer.bottomAnchor),
-            refreshButton.leadingAnchor.constraint(equalTo: vocabContainer.leadingAnchor, constant: 290),
-            refreshButton.trailingAnchor.constraint(equalTo: vocabContainer.trailingAnchor)
+            refreshButton.topAnchor.constraint(equalTo: blueVocabContainer.topAnchor, constant: 145),
+            refreshButton.bottomAnchor.constraint(equalTo: blueVocabContainer.bottomAnchor),
+            refreshButton.leadingAnchor.constraint(equalTo: blueVocabContainer.leadingAnchor, constant: 290),
+            refreshButton.trailingAnchor.constraint(equalTo: blueVocabContainer.trailingAnchor)
         ])
     }
     
@@ -178,7 +170,7 @@ extension HomeViewController {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: vocabContainer.topAnchor, constant: 220),
+            tableView.topAnchor.constraint(equalTo: blueVocabContainer.topAnchor, constant: 220),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -186,16 +178,23 @@ extension HomeViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Row Selected: \(viewModel.count())")
+        print("Row Selected: \(indexPath.row)")
+        let detailVC = DetailViewController()
+        detailVC.configure(with: viewModel.term(at: indexPath))
+        detailVC.speechLabel.text = viewModel.term(at: indexPath).speechType
+        detailVC.definitionLabel.text = viewModel.term(at: indexPath).definition
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 100
     }
 }
 
+// MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.count()
@@ -211,5 +210,3 @@ extension HomeViewController: UITableViewDataSource {
         return cell
     }
 }
-
-

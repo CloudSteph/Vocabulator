@@ -13,7 +13,6 @@ final class HomeCell: UITableViewCell {
     let contentContainer: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.frame = .zero
         container.layer.cornerRadius = 20
         container.backgroundColor = Colors.yellow
         return container
@@ -24,22 +23,22 @@ final class HomeCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
         return stackView
     }()
     
     let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = .zero
-        label.font = UIFont(name: "Montserrat-SemiBold", size: 18)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 20)
         return label
     }()
     
     let speechLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = .zero
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.font = UIFont(name: "Montserrat-Italic", size: 12)
         return label
     }()
@@ -47,8 +46,8 @@ final class HomeCell: UITableViewCell {
     let definitionLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = .zero
         label.font = UIFont(name: "Montserrat-Light", size: 12)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -92,12 +91,16 @@ extension HomeCell {
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: contentContainer.topAnchor, constant: 15),
-            stackView.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor, constant: -16)
+            stackView.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor, constant: -15)
         ])
         
         stackView.addArrangedSubview(wordLabel)
         stackView.addArrangedSubview(speechLabel)
+        
+//        stackView.backgroundColor = .systemOrange
+//        wordLabel.backgroundColor = .systemPink
+//        speechLabel.backgroundColor = .systemCyan
     }
     
     private func setDefinitionLabel() {
@@ -106,8 +109,8 @@ extension HomeCell {
         
         NSLayoutConstraint.activate([
             definitionLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 30),
-            definitionLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            definitionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
+            definitionLabel.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: 15),
+            definitionLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor)
         ])
     }
 }
