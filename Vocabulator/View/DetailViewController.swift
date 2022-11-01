@@ -40,7 +40,7 @@ final class DetailViewController: UIViewController {
     let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Montserrat-Regular", size: 20)
+        label.font = UIFont(name: "Montserrat-Regular", size: 18)
         label.text = "causing great surprise or wonder; astonishing"
         label.numberOfLines = 0
         return label
@@ -63,20 +63,11 @@ final class DetailViewController: UIViewController {
         return container
     }()
     
-    let stackViewSynonymSet: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 15
-        return stackView
-    }()
-    
     let synonymLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "awesome"
-        label.font = UIFont(name: "Montserat-Light", size: 16)
+        label.font = UIFont(name: "Montserrat-Regular", size: 16)
         return label
     }()
     
@@ -97,20 +88,11 @@ final class DetailViewController: UIViewController {
         return container
     }()
     
-    let stackViewAntonymSet: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 15
-        return stackView
-    }()
-    
     let antonymLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "credible"
-        label.font = UIFont(name: "Montserrat-Light", size: 16)
+        label.font = UIFont(name: "Montserrat-Regular", size: 16)
         return label
     }()
     
@@ -130,22 +112,11 @@ final class DetailViewController: UIViewController {
         container.backgroundColor = Colors.green
         return container
     }()
-    
-    let stackViewExampleSet: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 15
-        return stackView
-    }()
-    
+        
     let exampleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "This was an amazing movie."
-        label.text = "I got an amazing grade on test."
-        label.text = "You made an amazing discovery."
         label.numberOfLines = 0
         label.font = UIFont(name: "Montserrat-Light", size: 16)
         return label
@@ -165,16 +136,20 @@ final class DetailViewController: UIViewController {
         view.backgroundColor = .white
         
         setDefinitionContainer()
-        setStackViewdDefintionSet()
+        setDefintionTitleLabel()
+        setDefinitionStackView()
         
         setSynonymContainer()
-        setStackViewSynonymSet()
+        setSynonymLabel()
+        setSynonymTitleLabel()
         
         setAntonymContainer()
-        setStackViewAntonymSet()
+        setAntonymLabel()
+        setAntonymTitleLabel()
         
         setExampleContainer()
-        setStackViewExampleSet()
+        setExampleLabel()
+        setExampleTitleLabel()
     }
     func configure(with vocab: Vocabulary) {
         navigationItem.title = vocab.word
@@ -191,22 +166,32 @@ extension DetailViewController {
             definitionContainer.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
             definitionContainer.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             definitionContainer.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            definitionContainer.heightAnchor.constraint(equalToConstant: 170)
+            definitionContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 180)
         ])
     }
     
-    private func setStackViewdDefintionSet() {
+    private func setDefinitionStackView() {
         definitionContainer.addSubview(stackViewDefinitionSet)
         
         NSLayoutConstraint.activate([
             stackViewDefinitionSet.topAnchor.constraint(equalTo: definitionContainer.topAnchor, constant: 20),
             stackViewDefinitionSet.leadingAnchor.constraint(equalTo: definitionContainer.leadingAnchor, constant: 20),
-            stackViewDefinitionSet.trailingAnchor.constraint(equalTo: definitionContainer.trailingAnchor, constant: -20),
+            stackViewDefinitionSet.trailingAnchor.constraint(equalTo: definitionContainer.trailingAnchor, constant: -20)
         ])
         
         stackViewDefinitionSet.addArrangedSubview(speechLabel)
         stackViewDefinitionSet.addArrangedSubview(definitionLabel)
-        stackViewDefinitionSet.addArrangedSubview(definitionTitleLabel)
+    }
+    
+    private func setDefintionTitleLabel() {
+        definitionContainer.addSubview(definitionTitleLabel)
+
+        NSLayoutConstraint.activate([
+            definitionTitleLabel.topAnchor.constraint(equalTo: definitionContainer.topAnchor),
+            definitionTitleLabel.bottomAnchor.constraint(equalTo: definitionContainer.bottomAnchor, constant: 125),
+            definitionTitleLabel.leadingAnchor.constraint(equalTo: definitionContainer.leadingAnchor, constant: 260),
+            definitionTitleLabel.trailingAnchor.constraint(equalTo: definitionContainer.trailingAnchor)
+        ])
     }
 }
 
@@ -217,83 +202,104 @@ extension DetailViewController {
         view.addSubview(synonymContainer)
 
         NSLayoutConstraint.activate([
-            synonymContainer.topAnchor.constraint(equalTo: definitionContainer.topAnchor, constant: 200),
+            synonymContainer.topAnchor.constraint(equalTo: definitionContainer.topAnchor, constant: 205),
             synonymContainer.leadingAnchor.constraint(equalTo: definitionContainer.leadingAnchor),
             synonymContainer.trailingAnchor.constraint(equalTo: definitionContainer.trailingAnchor),
-            synonymContainer.heightAnchor.constraint(equalToConstant: 100)
+            synonymContainer.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
-    private func setStackViewSynonymSet() {
-        
-        synonymContainer.addSubview(stackViewSynonymSet)
+    private func setSynonymLabel() {
+        synonymContainer.addSubview(synonymLabel)
         
         NSLayoutConstraint.activate([
-            stackViewSynonymSet.topAnchor.constraint(equalTo: synonymContainer.topAnchor, constant: 20),
-            stackViewSynonymSet.leadingAnchor.constraint(equalTo: synonymContainer.leadingAnchor, constant: 20),
-            stackViewSynonymSet.trailingAnchor.constraint(equalTo: synonymContainer.trailingAnchor, constant: -20)
+            synonymLabel.topAnchor.constraint(equalTo: synonymContainer.topAnchor, constant: 20),
+            synonymLabel.leadingAnchor.constraint(equalTo: synonymContainer.leadingAnchor, constant: 20),
+            synonymLabel.trailingAnchor.constraint(equalTo: synonymContainer.trailingAnchor, constant: -20)
         ])
-        
-        stackViewSynonymSet.addArrangedSubview(synonymLabel)
-        stackViewSynonymSet.addArrangedSubview(synonymTitleLabel)
+    }
+    
+    private func setSynonymTitleLabel() {
+        synonymContainer.addSubview(synonymTitleLabel)
+
+        NSLayoutConstraint.activate([
+            synonymTitleLabel.topAnchor.constraint(equalTo: synonymContainer.topAnchor),
+            synonymTitleLabel.bottomAnchor.constraint(equalTo: synonymContainer.bottomAnchor, constant: 25),
+            synonymTitleLabel.leadingAnchor.constraint(equalTo: synonymContainer.leadingAnchor, constant: 260),
+            synonymTitleLabel.trailingAnchor.constraint(equalTo: synonymContainer.trailingAnchor)
+        ])
     }
 }
 
 // MARK: - Setup Method for Antonym
 extension DetailViewController {
     private func setAntonymContainer() {
-        
+
         view.addSubview(antonymContainer)
-        
+
         NSLayoutConstraint.activate([
-            antonymContainer.topAnchor.constraint(equalTo: synonymContainer.topAnchor, constant: 130),
+            antonymContainer.topAnchor.constraint(equalTo: synonymContainer.topAnchor, constant: 100),
             antonymContainer.leadingAnchor.constraint(equalTo: synonymContainer.leadingAnchor),
             antonymContainer.trailingAnchor.constraint(equalTo: synonymContainer.trailingAnchor),
-            antonymContainer.heightAnchor.constraint(equalToConstant: 100)
+            antonymContainer.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
-    
-    private func setStackViewAntonymSet() {
-        
-        antonymContainer.addSubview(stackViewAntonymSet)
-        
+
+    private func setAntonymLabel() {
+        antonymContainer.addSubview(antonymLabel)
+
         NSLayoutConstraint.activate([
-            stackViewAntonymSet.topAnchor.constraint(equalTo: antonymContainer.topAnchor, constant: 20),
-            stackViewAntonymSet.leadingAnchor.constraint(equalTo: antonymContainer.leadingAnchor, constant: 20),
-            stackViewAntonymSet.trailingAnchor.constraint(equalTo: antonymContainer.trailingAnchor, constant: -20)
+            antonymLabel.topAnchor.constraint(equalTo: antonymContainer.topAnchor, constant: 20),
+            antonymLabel.leadingAnchor.constraint(equalTo: antonymContainer.leadingAnchor, constant: 20),
+            antonymLabel.trailingAnchor.constraint(equalTo: antonymContainer.trailingAnchor, constant: -20)
         ])
-        
-        stackViewAntonymSet.addArrangedSubview(antonymLabel)
-        stackViewAntonymSet.addArrangedSubview(antonymTitleLabel)
+    }
+
+    private func setAntonymTitleLabel() {
+        antonymContainer.addSubview(antonymTitleLabel)
+
+        NSLayoutConstraint.activate([
+            antonymTitleLabel.topAnchor.constraint(equalTo: antonymContainer.topAnchor),
+            antonymTitleLabel.bottomAnchor.constraint(equalTo: antonymContainer.bottomAnchor, constant: 25),
+            antonymTitleLabel.leadingAnchor.constraint(equalTo: antonymContainer.leadingAnchor, constant: 260),
+            antonymTitleLabel.trailingAnchor.constraint(equalTo: antonymContainer.trailingAnchor)
+        ])
     }
 }
 
 // MARK: - Setup Method for Example
 extension DetailViewController {
     private func setExampleContainer() {
-        
+
         view.addSubview(exampleContainer)
-        
+
         NSLayoutConstraint.activate([
-            exampleContainer.topAnchor.constraint(equalTo: antonymContainer.topAnchor, constant: 130),
+            exampleContainer.topAnchor.constraint(equalTo: antonymContainer.topAnchor, constant: 105),
             exampleContainer.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             exampleContainer.leadingAnchor.constraint(equalTo: antonymContainer.leadingAnchor),
             exampleContainer.trailingAnchor.constraint(equalTo: antonymContainer.trailingAnchor),
-            exampleContainer.heightAnchor.constraint(equalToConstant: 200)
+            exampleContainer.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    
-    private func setStackViewExampleSet() {
-        
-        exampleContainer.addSubview(stackViewExampleSet)
-        
+
+    private func setExampleLabel() {
+        exampleContainer.addSubview(exampleLabel)
+
         NSLayoutConstraint.activate([
-            stackViewExampleSet.topAnchor.constraint(equalTo: exampleContainer.topAnchor, constant: 20),
-            stackViewExampleSet.leadingAnchor.constraint(equalTo: exampleContainer.leadingAnchor, constant: 20),
-            stackViewExampleSet.trailingAnchor.constraint(equalTo: exampleContainer.trailingAnchor, constant: -20)
+            exampleLabel.topAnchor.constraint(equalTo: exampleContainer.topAnchor, constant: 20),
+            exampleLabel.leadingAnchor.constraint(equalTo: exampleContainer.leadingAnchor, constant: 20),
+            exampleLabel.trailingAnchor.constraint(equalTo: exampleContainer.trailingAnchor, constant: -20)
         ])
-        
-        stackViewExampleSet.addArrangedSubview(exampleLabel)
-        stackViewExampleSet.addArrangedSubview(exampleTitleLabel)
+    }
+
+    private func setExampleTitleLabel() {
+        exampleContainer.addSubview(exampleTitleLabel)
+
+        NSLayoutConstraint.activate([
+            exampleTitleLabel.topAnchor.constraint(equalTo: exampleContainer.topAnchor),
+            exampleTitleLabel.bottomAnchor.constraint(equalTo: exampleContainer.bottomAnchor, constant: 235),
+            exampleTitleLabel.leadingAnchor.constraint(equalTo: exampleContainer.leadingAnchor, constant: 260),
+            exampleTitleLabel.trailingAnchor.constraint(equalTo: exampleContainer.trailingAnchor)
+        ])
     }
 }

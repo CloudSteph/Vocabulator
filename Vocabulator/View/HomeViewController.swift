@@ -14,7 +14,7 @@ final class HomeViewController: UIViewController {
     let blueVocabContainer: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = Colors.lightBlue
+        container.backgroundColor = Colors.blue1
         container.layer.cornerRadius = 25
         return container
     }()
@@ -130,7 +130,7 @@ extension HomeViewController {
         NSLayoutConstraint.activate([
             definitionLabel.topAnchor.constraint(equalTo: blueVocabContainer.topAnchor, constant: 60),
             definitionLabel.leadingAnchor.constraint(equalTo: blueVocabContainer.leadingAnchor, constant: 15),
-            definitionLabel.trailingAnchor.constraint(equalTo: blueVocabContainer.trailingAnchor),
+            definitionLabel.trailingAnchor.constraint(equalTo: blueVocabContainer.trailingAnchor, constant: -15),
         ])
     }
 }
